@@ -7,22 +7,51 @@
 
 body {
   margin: 20px 0;
-  background-color: white;
+  background-color: rgba(255, 236, 125, 0.363);
+  overflow: hidden;
 }
 
-.modal {
-    z-index: 1;
+#new-game {
+  visibility: hidden;
 }
+
+#main {
+  visibility: hidden;
+}
+
+.modal{
+  color: blueviolet;
+}
+
+h1 {
+  color: blueviolet;
+  background: gold;
+  font-size: 65px;
+  line-height: 64px;
+  font-weight: 700;
+  float: left;
+  padding: 10px;
+}
+
+#counter {
+  color: red;
+  font-size: 55px;
+  line-height: 54px;
+  font-weight: 700;
+  float: left;
+  padding: 10px;
+}
+
 
 #game {
-    max-width: 80%;
-    max-height: 75%;
-    background-color: #6589f9;
-    display: flex; 
-    margin-left: 20%;
-    margin-right: 20%;
-    padding: 5%;
-    border-radius: 4px;
+  max-width: 90%;
+  max-height: 85%;
+  background-color: #6589f9;
+  display: flex; 
+  margin-left: 20%;
+  margin-right: 20%;
+  padding: 3%;
+  border-radius: 4px;
 	box-shadow: 8px 9px 26px 0 rgba(46, 61, 73, 0.5);
 }
 
@@ -96,63 +125,52 @@ body {
 }
 
 
-.wrap {
-    margin: auto;
-    z-index: 1;
+.progress {
+  margin-top: 10px;
+  background-color: gold;
+  border: 2px solid white;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.514);
+}
+
+.progress-bar{
+  border-right: 1px solid gray;
+}
+
+
+
+@media only screen and (max-width: 1280px) {
+  #game {
+    max-width: 100%;
+    max-height: 100%;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding: 3%;
+    border-radius: 3px;
   }
-  
-  .modal {
-    background-color: #fff;
-    padding: 2em 3em;
-    text-align: center;
-    border-radius: .5em;
-    display: block;
-    &.is-active { display: block; }
+
+  .card,
+  .back,
+  .front {
+    height: 125px;
+    width: 125px;
   }
-  
-  .modal-image {
-    width: 40px;
-    height: 40px;
-    margin: 0 auto;
-    border-radius: 50%;
-    box-shadow: 0 0 0 2px #48DB71;
-    padding: 11px 10px 2px;
-    margin-bottom: 2em;
+}
+
+
+@media only screen and (max-width: 780px) {
+  .card,
+  .back,
+  .front {
+    height: 100px;
+    width: 100px;
   }
-  
-  h1 {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-bottom: .5em;
+}
+
+@media only screen and (max-width: 600px) {
+  .card,
+  .back,
+  .front {
+    height: 50px;
+    width: 50px;
   }
-  
-  p {
-    margin-bottom: 2em;
-    color: #666;
-  }
-  
-  .btn-open {
-    display: none;
-    &.is-active { display: block; }
-  }
-  
-  button {
-    font-size: 1.25em;
-    font-weight: bold;
-    background-color: #000;
-    border: none;
-    padding: .5em 1em;
-    color: #fff;
-    box-shadow: 0 0 0 2px #000 inset;
-    border-radius: .25em;
-    cursor: pointer;
-    transition: background .4s ease, color .4s ease;
-    
-    &:hover {
-      box-shadow: 0 0 0 2px #000 inset;
-      color: #000;
-      background-color: transparent;
-    }
-  }
-  
-  
+}
