@@ -51,22 +51,6 @@ $(document).ready(function(){
       },
   ] 
 
-
-  /*     {
-          name: "efi",
-          source: "./img/efi-card.png",
-      }, */
-      /*     {
-          name: "wein",
-          source: "./img/wein-card.png",
-      }, */
-  /*     {
-          name: "uza",
-          source: "img/uza-card.png",
-      }, */
-
-
-
   function shuffle(deck) {
     var currentIndex = deck.length, temporaryValue, randomIndex;
 
@@ -85,13 +69,13 @@ $(document).ready(function(){
   let secondGuess = '';
   let count = 0;
   let previousTarget = null;
-  let delay = 1500;
+  let delay = 1000;
   let timer = 0;
   let wrong = 0;
   let right = 0;
   let gameOn = 0;
   let wrongCount = document.getElementById('counter');
-  let barStyle = document.querySelector(".progress-bar").style;
+  let timerBar = document.querySelector(".progress-bar");
   let winDisplay = document.getElementById('win-display');
   let main = document.getElementById('main');
   let newGameButton = document.getElementById('new-game');
@@ -103,6 +87,8 @@ $(document).ready(function(){
   game.appendChild(grid);
 
 
+
+  // start game and distribute cards
   function createGrid() {
       main.style.visibility = "visible";
       newGameButton.style.visibility = "visible";
@@ -110,7 +96,7 @@ $(document).ready(function(){
       startButton.textContent = "Play again!";
       gameOn = 1;
       setInterval(displayLoss, 50);
-      barStyle.visibility = "visible";
+      timerBar.style.visibility = "visible";
       let deck = shuffle(cardDeck);
       var gridSize = deck.length;
       let rows = (gridSize / 3);
@@ -144,6 +130,7 @@ $(document).ready(function(){
       }
   }
 
+  // clear cards
   function clearGrid() {
     let oldGame = grid.getElementsByClassName('gridRow');
     while (oldGame.length > 0) {
@@ -151,14 +138,14 @@ $(document).ready(function(){
     }
   }
 
-  const match = () => {
+  function match() {
     const selected = document.querySelectorAll('.selected');
     selected.forEach(card => {
       card.classList.add('match');
     });
   };
 
-  const resetGuesses = () => {
+  function resetGuesses() {
     firstGuess = '';
     secondGuess = '';
     count = 0;
@@ -170,6 +157,7 @@ $(document).ready(function(){
     });
   };
 
+  //analyze card choice
   grid.addEventListener('click', event => {
 
     const clicked = event.target;
@@ -210,17 +198,17 @@ $(document).ready(function(){
 
   });
 
-
+//game timer
   function displayLoss() {
     if (gameOn === 1) {
       timer++;
     }
-    var percent = 100-(0.05* timer);
-    barStyle.width = `${percent}%`;
+    var percent = 100-(0.07 * timer);
+    timerBar.style.width = `${percent}%`;
     if (percent === 0){
       gameOn = 0;
       winDisplay.textContent = "You lost.";
-      barStyle.visibility = "hidden";
+      timerBar.style.visibility = "hidden";
       $('#myModal').modal('show');
     }
   }
@@ -231,23 +219,22 @@ $(document).ready(function(){
     $('#myModal').modal('show');
   }
 
+
+  // bootstrap functions to initialize Modal and game
   $('#myModal').on('hidden.bs.modal', function (e) {
     $('#myModal').modal('hide');
     resetGuesses();
     createGrid();
   })
 
-
   $('#myModal').on('shown.bs.modal', function (e) {
     clearGrid();
     timer = 0;
     gameOn = 0;
     main.style.visibility = "hidden";
-    barStyle.visibility = "hidden";
+    timerBar.style.visibility = "hidden";
     $('#myModal').modal('show');
   })
 
   $('#myModal').modal('show'); 
-
-
 });

@@ -21,6 +21,26 @@ body {
 
 .modal{
   color: blueviolet;
+  text-align: center;
+}
+
+
+.modal-body {
+  height: 400px;
+  width: 420px;
+  background: url('../img/memory-back.png') no-repeat center center / contain;
+  color: white;
+  text-shadow: 2px 2px 4px #000000;
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.title {
+  margin-top: -5%;
 }
 
 h1 {
@@ -44,8 +64,8 @@ h1 {
 
 
 #game {
-  max-width: 90%;
-  max-height: 85%;
+  max-width: 100%;
+  max-height: 100%;
   background-color: #6589f9;
   display: flex; 
   margin-left: 20%;
@@ -126,8 +146,10 @@ h1 {
 
 
 .progress {
+  width: 80%;
+  margin-left: 10%;
   margin-top: 10px;
-  background-color: gold;
+  background-color: blueviolet;
   border: 2px solid white;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.514);
 }
@@ -166,6 +188,15 @@ h1 {
   }
 }
 
+@media screen and (min-width: 768px) { 
+  .modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .card,
   .back,
@@ -173,4 +204,17 @@ h1 {
     height: 50px;
     width: 50px;
   }
+  .title {
+    margin: 0;
+  }
+  h1 {
+    font-size: 45px;
+    line-height: 44px;
+  }
+  #counter{
+    font-size: 35px;
+    line-height: 34px;
+    font-weight: 700;
+  }
+
 }
