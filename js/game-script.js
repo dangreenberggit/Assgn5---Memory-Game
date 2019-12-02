@@ -51,20 +51,6 @@ $(document).ready(function(){
       },
   ] 
 
-  function shuffle(deck) {
-    var currentIndex = deck.length, temporaryValue, randomIndex;
-
-    while (currentIndex !== 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-      temporaryValue = deck[currentIndex];
-      deck[currentIndex] = deck[randomIndex];
-      deck[randomIndex] = temporaryValue;
-    }
-    return deck;
-  }
-
-
   let firstGuess = '';
   let secondGuess = '';
   let count = 0;
@@ -86,7 +72,18 @@ $(document).ready(function(){
   grid.setAttribute('class', 'grid');
   game.appendChild(grid);
 
+  function shuffle(deck) {
+    var currentIndex = deck.length, temporaryValue, randomIndex;
 
+    while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = deck[currentIndex];
+      deck[currentIndex] = deck[randomIndex];
+      deck[randomIndex] = temporaryValue;
+    }
+    return deck;
+  }
 
   // start game and distribute cards
   function createGrid() {
@@ -95,6 +92,8 @@ $(document).ready(function(){
       let startButton = document.getElementById('startButton');
       startButton.textContent = "Play again!";
       gameOn = 1;
+      wrong = 0;
+      wrongCount.textContent = "good luck! start!";
       setInterval(displayLoss, 50);
       timerBar.style.visibility = "visible";
       let deck = shuffle(cardDeck);
@@ -188,10 +187,11 @@ $(document).ready(function(){
           if (right === (0.5 * cardDeck.length)) {
             setTimeout(displayWin, delay);
           }
-        }
-        wrong ++;
-        wrongCount.textContent = `wrong guesses: ${wrong}`;
-        setTimeout(resetGuesses, delay);
+        } else {
+          wrong ++;
+          wrongCount.textContent = `wrong guesses: ${wrong}`;
+          setTimeout(resetGuesses, delay);
+          }
       }
       previousTarget = clicked;
     }
@@ -223,7 +223,6 @@ $(document).ready(function(){
   // bootstrap functions to initialize Modal and game
   $('#myModal').on('hidden.bs.modal', function (e) {
     $('#myModal').modal('hide');
-    resetGuesses();
     createGrid();
   })
 
